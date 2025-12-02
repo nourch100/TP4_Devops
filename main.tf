@@ -1,3 +1,7 @@
+# ----------------------------------------------------
+# Configuration Terraform et Provider 
+# ----------------------------------------------------
+
 terraform {
   required_providers {
     docker = {
@@ -10,8 +14,9 @@ terraform {
 provider "docker" {}
 
 # ----------------------------------------------------
-# POSTGRES IMAGE UPDATE
+# POSTGRES IMAGE 
 # ----------------------------------------------------
+
 resource "docker_image" "postgres_image" {
   name         = "postgres:latest"
   keep_locally = true
@@ -20,6 +25,7 @@ resource "docker_image" "postgres_image" {
 # ----------------------------------------------------
 # POSTGRES CONTAINER
 # ----------------------------------------------------
+
 resource "docker_container" "db_container" {
   name  = "tp-db-postgres"
   image = docker_image.postgres_image.name
@@ -58,6 +64,8 @@ resource "docker_container" "app_container" {
   depends_on = [
     docker_container.db_container
   ]
+
+# Mappage du port 80 interne au port externe défini dans variables.tf 8080
 
   ports {
     internal = 80
