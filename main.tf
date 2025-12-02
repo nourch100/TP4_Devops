@@ -10,7 +10,7 @@ terraform {
 provider "docker" {}
 
 # ----------------------------------------------------
-# POSTGRES IMAGE
+# POSTGRES IMAGE UPDATE
 # ----------------------------------------------------
 resource "docker_image" "postgres_image" {
   name         = "postgres:latest"
